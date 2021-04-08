@@ -206,6 +206,49 @@ def ScoreFProb_Drop(feature,index1,drop_values,alternative):
 
     return pv, f_prob
 
+def ProcessOtherModels(data_file):
+    lines = [ln.strip() for ln in open(data_file,"r").readlines()]
+    Evalues = [float(ln.split("\t")[1]) for ln in lines[1:]]
+    Mvalues = [float(ln.split("\t")[2]) for ln in lines[1:]]
+    Time = [int(ln.split("\t")[5].strip('"')) for ln in lines[1:]]
+    
+    Colors  = []
+    for v in Time:
+        if v == 0:
+            Colors.append("#1B7837")
+        elif v == 8:
+            Colors.append("#5AAE61")
+        elif v == 24:
+            Colors.append("#DEB887")
+        elif v == 72:
+            Colors.append("#9970AB")
+        elif v == 168:
+            Colors.append("#762A83")
+    
+    index_0d = []
+    index_8h = []
+    index_1d = []
+    index_3d = []
+    index_7d = []
+    
+    for i in range(len(Time)):
+        v = Time[i]
+        
+        if v == 0:
+            index_0d.append(i)
+        elif v == 8:
+            index_8h.append(i)
+        elif v == 24:
+            index_1d.append(i)
+        elif v == 72:
+            index_3d.append(i)
+        elif v == 168:
+            index_7d.append(i)
+            
+    Labels = [index_0d,index_8h,index_1d,index_3d,index_7d]
+            
+    return Evalues, Mvalues, Time, Colors, Labels
+
 #### Section 2 --- DU145 And DU145 X A549 Models ###
 
 def CheckSeedConsistency(EValues,Mvalues,tol=None,iter=None):
