@@ -4,7 +4,7 @@ Code and functions for generating the main results and figures of the gsNMF proj
 analyzing the progression of EMT
 
 The Jupyter Notebook Figures.ipynb goes through the creation of gsNMF models of
-each data set and generation of assocaited figures from [REF]
+each data set and generation of assocaited figures from PMID: 34490045
 
 Associated support functions can be found in FiguresModule.py.
 
